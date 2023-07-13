@@ -7,4 +7,5 @@ Luồng chạy:
   -RoomMaster sẽ được tạo mới theo tên của RoomType.
 
 Ảnh minh họa 2 node:
+
 ![image](https://github.com/lhdtinh2k/camunda-booking-service/assets/66221366/aa3734d9-63e6-488a-80a4-6f442460f4f5)
