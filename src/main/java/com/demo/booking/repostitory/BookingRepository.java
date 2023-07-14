@@ -1,4 +1,4 @@
-package com.demo.booking;
+package com.demo.booking.repostitory;
 
 
 import com.demo.booking.dto.BookingDto;

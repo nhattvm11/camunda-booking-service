@@ -1,4 +1,4 @@
-package com.demo.booking;
+package com.demo.booking.repostitory;
 
 
 import com.demo.booking.dto.RoomMasterDto;
@@ -10,8 +10,10 @@ public interface RoomMasterRepository extends Neo4jRepository<RoomMasterDto, Lon
 
     RoomMasterDto findByRoomType(String roomType);
 
-    @Query("MERGE (r:RoomMasterDto {roomType: $name})")
-    RoomMasterDto createRoomMasterIfNotExists(@Param("name") String roomType);
+    RoomMasterDto findByName(String name);
+
+    @Query("MERGE (r:RoomMasterDto {roomType: $roomType, name: $name})")
+    RoomMasterDto createRoomMasterIfNotExists(@Param("roomType") String roomType, @Param("name") String name);
 
     @Query("MATCH (b:BookingDto ), (r:RoomMasterDto {roomType: $roomType }) Where ID(b)=$bookingId CREATE (b)-[:BOOKED]->(r)")
     RoomMasterDto createConnection(@Param("bookingId") Long bookingId, @Param("roomType") String roomType);

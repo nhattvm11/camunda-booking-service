@@ -16,6 +16,9 @@ public class RoomMasterDto {
 
     private String roomType;
 
+    private String name;
+
+
     @Relationship(type="HAS", direction = Relationship.Direction.INCOMING)
     private List<BookingDto> bookings;
 
@@ -23,8 +26,17 @@ public class RoomMasterDto {
         // Empty constructor required as of Neo4j API 2.0.5
     };
 
-    public RoomMasterDto(String roomType) {
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public RoomMasterDto(String roomType, String name) {
         this.roomType = roomType;
+        this.name = name;
     }
 
 
