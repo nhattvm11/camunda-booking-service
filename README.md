@@ -1,11 +1,41 @@
 # camunda-booking-service
-B1: run neo4j desktop app, add mới một local DBMS, setting password 
-B2: lấy password đã tạo sửa lại ở file: "src\main\resources\application.properties" line: spring.neo4j.authentication.password='thay ở đây'
+Step 1: 
+  - Using Neo4j desktop app(if installed): run neo4j desktop app, add new local DBMS, setting password
+    
+  - using Docker:
+    * Open cmd and run this command
+    
+    docker run \
+        --name testneo4j \
+        -p7474:7474 -p7687:7687 \
+        -d \
+        -v $HOME/neo4j/data:/data \
+        -v $HOME/neo4j/logs:/logs \
+        -v $HOME/neo4j/import:/var/lib/neo4j/import \
+        -v $HOME/neo4j/plugins:/plugins \
+        --env NEO4J_AUTH=neo4j/password \
+        neo4j:latest
+    
+    * Run this comand to start:
+        tcp testneo4j
+    
+        
+    * By default, the Docker image exposes three ports for remote access:
+      7474 for HTTP
+      7473 for HTTPS
+      7687 for Bolt
 
-Luồng chạy:
-  -Tạo ra 2 node Booking và RoomMaster
-  -RoomMaster sẽ được tạo mới theo tên của RoomType.
+    * open http://localhost:7474/
+      username: neo4j
+      password: password
+      => login
 
-Ảnh minh họa 2 node:
+      => to see all node and relationship: WATCH(n) return(n)
 
-![image](https://github.com/lhdtinh2k/camunda-booking-service/assets/66221366/aa3734d9-63e6-488a-80a4-6f442460f4f5)
+Step 2: update in: "src\main\resources\application.properties" follow this: spring.neo4j.authentication.password='password'
+        => run project
+
+Flow:
+request from camunda -> check the room type in booking form -> save booking to DB -> create relationship Booking -[has]> RoomMaster -> send message back to camunda
+
+
