@@ -22,6 +22,10 @@ public class BookingDto {
     this.date = date;
   }
 
+  public Long getId() {
+    return id;
+  }
+
   @Relationship(type = "HAS")
   public Set<RoomMasterDto> roomMasterDtos;
 
