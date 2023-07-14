@@ -15,6 +15,6 @@ public interface RoomMasterRepository extends Neo4jRepository<RoomMasterDto, Lon
     @Query("MERGE (r:RoomMasterDto {roomType: $roomType, name: $name})")
     RoomMasterDto createRoomMasterIfNotExists(@Param("roomType") String roomType, @Param("name") String name);
 
-    @Query("MATCH (b:BookingDto ), (r:RoomMasterDto {roomType: $roomType }) Where ID(b)=$bookingId CREATE (b)-[:BOOKED]->(r)")
+    @Query("MATCH (b:BookingDto ), (r:RoomMasterDto {roomType: $roomType }) Where ID(b)=$bookingId CREATE (b)-[:HAS]->(r)")
     RoomMasterDto createConnection(@Param("bookingId") Long bookingId, @Param("roomType") String roomType);
 }
